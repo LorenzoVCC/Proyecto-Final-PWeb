@@ -1,0 +1,33 @@
+.item-container {
+    height: 130px;
+    display: flex;
+    align-items: center;      /* centra verticalmente la imagen y el texto */
+    gap: 20px;
+    padding: 5px;
+    border: 1px solid lightgray;
+    transition: .4s;
+    cursor: pointer;    
+}
+.item-container:hover {
+    background-color: rgba(177, 187, 187, 0.732);
+    background-color: rgb(223, 166, 60);
+    box-shadow: 4px 8px 5px 0px rgba(0,0,0,0.75);
+}
+
+.restaurant-info-container {
+    height: 130px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+} 
+.restaurant-info-container h3,
+.restaurant-info-container h4,
+.restaurant-info-container p {
+    margin: 0;                /* borra el espacio grande */
+    line-height: 3;         /* opcional: más compacto */
+}
+
+.img-container {
+    width: 190px;
+    height: 130px;
+}
