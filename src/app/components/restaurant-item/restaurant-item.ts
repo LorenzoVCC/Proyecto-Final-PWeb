@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { RestaurantPublicDTO } from '../../interfaces/restaurant-interface';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-restaurant-item',
+  standalone: true,
   imports: [RouterLink],
   templateUrl: './restaurant-item.html',
   styleUrl: './restaurant-item.scss',
 })
-export class RestaurantItem {
 
+export class RestaurantItem {
+  @Input() restaurant!: RestaurantPublicDTO;
 }
