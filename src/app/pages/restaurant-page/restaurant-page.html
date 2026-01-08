@@ -1,5 +1,5 @@
 <div class="flex-center">
-    
+
     <div class="back-to-menu-btn">
         <a routerLink=""><img src="/back-to-menu.svg" alt=""></a>
     </div>
@@ -11,9 +11,8 @@
 
                 <a routerLink="/product-page"><img src="/restaurant-generic-img.jpg" alt=""></a>
                 <div class="banner-info">
-                    <h1>Restaurante</h1>
-                    <p>Descripción-Descripción-Descripción-Descripción-Descripción-Descripción-Descripción-Descripción-Descripción-Descripción-Descripción-Descripción-Descripción-Descripción-Descripción
-                    </p>
+                    <h1>{{ restaurant?.name }}</h1>
+                    <p>{{ restaurant?.description }} </p>
                 </div>
             </div>
         </section>
@@ -22,13 +21,17 @@
 
         <section id="categories-container-0">
             <div class="categories-container-1">
-                <category-pill></category-pill>
-                <category-pill></category-pill>
-                <category-pill></category-pill>
+                @for (c of categories; track c.Id_Category) {
+                    <category-pill [category]="c"></category-pill>
+                } 
+                @empty 
+                {
+                    <p>No hay categorías.</p>
+                }
             </div>
         </section>
 
-<!-- ////////////////////////////// -->
+        <!-- ////////////////////////////// -->
 
         <section id="products-container-0">
 

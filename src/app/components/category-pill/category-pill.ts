@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CategoryPublicDTO } from '../../interfaces/category-interface';
 
 @Component({
   selector: 'category-pill',
@@ -7,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './category-pill.scss',
 })
 export class CategoryPill {
-
+  @Input() category!: CategoryPublicDTO
 }

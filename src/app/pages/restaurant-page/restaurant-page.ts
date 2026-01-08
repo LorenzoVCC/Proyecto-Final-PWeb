@@ -19,7 +19,7 @@ export class RestaurantPage implements OnInit {
 
   private categoryService = inject(CategoryService);
   categories: CategoryPublicDTO[] = [];
-  
+
   id = input.required<string>();
   readonly restaurantService = inject(RestaurantService);
 
@@ -27,12 +27,23 @@ export class RestaurantPage implements OnInit {
   cargandoRestaurant = false;
 
   async ngOnInit() {
-    if (this.id()) {
-      this.restaurant = this.restaurantService.restaurants.find(r => r.id.toString() === this.id());
-      
-      if (!this.restaurant) this.cargandoRestaurant = true;
 
-      this.cargandoRestaurant = false;
+    console.log('ID que llega por la ruta:', this.id());
+
+    this.cargandoRestaurant = true;
+
+    this.restaurant = this.restaurantService.restaurants.find(
+      r => r.id.toString() === this.id()
+    );
+
+    console.log('Restaurant encontrado:', this.restaurant);
+
+    if (this.restaurant) {
+      this.categories = this.categoryService.getByRestaurantId(this.restaurant.id);
     }
+
+    console.log('Categorias cargadas:', this.categories);
+
+    this.cargandoRestaurant = false;
   }
 }
