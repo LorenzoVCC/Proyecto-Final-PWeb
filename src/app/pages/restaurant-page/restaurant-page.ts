@@ -5,9 +5,14 @@ import { RestaurantService } from '../../services/restaurant-service';
 import { RestaurantForReadDTO } from '../../interfaces/restaurant-interface';
 
 import { ProductCard } from '../../components/product-card/product-card';
+import { ProductService } from '../../services/product.service';
+import { ProductForCreateUpdateDTO } from '../../interfaces/product-interface';
+
 import { CategoryPill } from '../../components/category-pill/category-pill';
 import { CategoryService } from '../../services/category-service';
 import { CategoryForReadDTO } from '../../interfaces/category-interface';
+
+////////////////////////////////////////////////////////////////////////////////
 
 @Component({
   selector: 'restaurant-page',
@@ -17,9 +22,13 @@ import { CategoryForReadDTO } from '../../interfaces/category-interface';
   styleUrl: './restaurant-page.scss',
 })
 
+////////////////////////////////////////////////////////////////////////////////
+
 export class RestaurantPage implements OnInit {
 
   private categoryService = inject(CategoryService);
+  private productService = inject(ProductService);
+
   categories: CategoryForReadDTO[] = [];
 
   id = input.required<string>();
@@ -44,16 +53,23 @@ export class RestaurantPage implements OnInit {
 
     this.cargandoRestaurant = false;
   }
+  ///////////////
 
+  getProductsByCategoryId(categoryId: number) {
+    return this.productService.getByCategoryId(categoryId);
+  }
+///////////////
   async createProduct(categoryId: number) {
-    if(!this.restaurant) return;
+    if (!this.restaurant) return;
 
-    const newProduct = {
+    const newProduct: ProductForCreateUpdateDTO = {
       name: 'Nuevo producto',
       description: 'Descripción',
       price: 1000,
-      imageUrl: '',
-      idCategory: categoryId,
-    }
+      discount: 0,
+      urlImage: '',
+      id_Category: categoryId,
+    };
+    this.productService.createProduct(newProduct);
   }
 }

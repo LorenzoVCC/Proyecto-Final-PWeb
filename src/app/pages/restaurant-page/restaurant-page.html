@@ -25,15 +25,24 @@
 
         <!-- //////////////  PILLS   //////////////// -->
         <section id="categories-container-0">
-            <div class="categories-container-1">
-                @for (c of categories; track c.Id_Category) {
-                <category-pill [category]="c"></category-pill>
-                }
-                @empty
-                {
-                <p>No hay categorías.</p>
-                }
+            
+            <div class="pills-plus">
+                <div class="categories-container-1">
+                    @for (c of categories; track c.Id_Category) {
+                        <category-pill [category]="c"></category-pill>
+                    }
+                    @empty
+                    {
+                        <p>No hay categorías.</p>
+                    }
+                    
+                </div>
+                <!--  -->
+                <div class="category-btn-container">
+                    <button class="add-category-btn" type="button">+</button>
+                </div>
             </div>
+                
         </section>
 
         <!-- /////////////////CONTAINER Y PRODUCT CARDS//////////////// -->
@@ -47,19 +56,25 @@
                 <div class="category-header">
                     <h2>{{ c.Name }}</h2>
 
-                    <button class="add-product-btn" type="button" (click)="createProduct(c.Id_Category)">+</button> 
+                    <button class="add-product-btn" type="button" (click)="createProduct(c.Id_Category)">+</button>
                 </div>
 
                 <div class="products-container-1">
-                    <product-card></product-card>
+                    @for (p of getProductsByCategoryId(c.Id_Category); track p.id_Product) {
+                    <product-card [product]="p"></product-card>
+                    }
+                    @empty {
+                    <p>La categoría no contiene productos aún.</p>
+                    }
                 </div>
-
             </section>
+
             }
             @empty
             {
             <p>No hay categorías para mostrar productos.</p>
             }
+
         </section>
 
     </div>

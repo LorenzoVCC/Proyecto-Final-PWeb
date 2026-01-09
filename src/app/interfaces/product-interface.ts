@@ -8,7 +8,7 @@ export interface ProductForReadDTO {
   id_Category: number;
 }
 
-export interface ProductForCreateDTO {
+export interface ProductForCreateUpdateDTO {
   name: string;
   description?: string;
   price: number;

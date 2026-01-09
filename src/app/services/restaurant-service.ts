@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { inject, Inject, Injectable } from '@angular/core';
 import { RestaurantForReadDTO } from '../interfaces/restaurant-interface';
 
 @Injectable({ providedIn: 'root' })
@@ -35,3 +35,4 @@ export class RestaurantService {
     return this.restaurants.find(r => r.id === id) ?? null
   }
 }
+
