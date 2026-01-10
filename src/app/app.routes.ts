@@ -6,6 +6,7 @@ import { RestaurantPage } from './pages/restaurant-page/restaurant-page';
 import { ProductPage } from './pages/product-page/product-page';
 import { ClientLayout } from './layouts/client-layout/client-layout';
 import { NewCategoryPage } from './pages/new-category-page/new-category-page';
+import { NewProductPage } from './pages/new-product-page/new-product-page';
 
 
 export const routes: Routes = [
@@ -36,6 +37,10 @@ export const routes: Routes = [
       {
         path: "create-category",
         component: NewCategoryPage,
+      },
+      {
+        path: "new-product-page",
+        component: NewProductPage,
       }
     ],
   },

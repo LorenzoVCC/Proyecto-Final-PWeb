@@ -25,26 +25,26 @@
 
         <!-- //////////////  PILLS   //////////////// -->
         <section id="categories-container-0">
-            
+
             <div class="pills-plus">
                 <div class="categories-container-1">
                     @for (c of categories; track c.Id_Category) {
-                        <category-pill [category]="c"></category-pill>
+                    <category-pill [category]="c"></category-pill>
                     }
                     @empty
                     {
-                        <p>No hay categorías.</p>
+                    <p>No hay categorías.</p>
                     }
-                    
+
                 </div>
                 <!--  -->
                 <div class="category-btn-container">
-                    <a [routerLink]="['/create-category']">    
+                    <a [routerLink]="['/create-category']">
                         <button class="add-category-btn" type="button" routerLink="category-page">+</button>
                     </a>
                 </div>
             </div>
-                
+
         </section>
 
         <!-- /////////////////CONTAINER Y PRODUCT CARDS//////////////// -->
@@ -58,7 +58,8 @@
                 <div class="category-header">
                     <h2>{{ c.Name }}</h2>
 
-                    <button class="add-product-btn" type="button" (click)="createProduct(c.Id_Category)">+</button>
+                    <a [routerLink]="['/new-product-page']"><button class="add-product-btn" type="button">+</button></a>
+                    <!-- (click)="createProduct(c.Id_Category)" -->
                 </div>
 
                 <div class="products-container-1">
