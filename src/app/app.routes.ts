@@ -35,11 +35,11 @@ export const routes: Routes = [
         component: ProductPage,
       },
       {
-        path: "create-category",
+        path: "create-category/:restaurantId", 
         component: NewCategoryPage,
       },
       {
-        path: "new-product-page",
+        path: "new-product-page/:restaurantId/:categoryId",
         component: NewProductPage,
       }
     ],

@@ -6,12 +6,11 @@ import { CategoryCreateUpdateDTO, CategoryForReadDTO } from '../interfaces/categ
 })
 
 export class CategoryService {
-  private readonly LOGGED_RESTAURANT_ID = 1;
 
   private categories: CategoryForReadDTO[] = [
     { Id_Category: 1, Name: 'Appetizers', Id_Restaurant: 1 },
     { Id_Category: 2, Name: 'Main Courses', Id_Restaurant: 1 },
-    { Id_Category: 1, Name: 'Appetizers', Id_Restaurant: 2 },
+    { Id_Category: 3, Name: 'Appetizers', Id_Restaurant: 2 },
   ];
 
   getByRestaurantId(restaurantId: number): CategoryForReadDTO[] {
@@ -19,6 +18,20 @@ export class CategoryService {
   }
 
   getById(id: number): CategoryForReadDTO | null {
-  return this.categories.find(c => c.Id_Category === id) ?? null;
+    return this.categories.find(c => c.Id_Category === id) ?? null;
+  }
+
+  createCategory(dtodata: CategoryCreateUpdateDTO, restaurantId: number) {
+
+    const newId = this.categories.length + 1;
+
+    const created: CategoryForReadDTO = {
+      Id_Category: newId,
+      Name: dtodata.Name,
+      Id_Restaurant: restaurantId,
+    };
+    this.categories.push(created);
+    return created;
   }
 }
+

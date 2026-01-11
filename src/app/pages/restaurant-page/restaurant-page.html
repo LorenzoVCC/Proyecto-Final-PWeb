@@ -39,9 +39,8 @@
                 </div>
                 <!--  -->
                 <div class="category-btn-container">
-                    <a [routerLink]="['/create-category']">
-                        <button class="add-category-btn" type="button" routerLink="category-page">+</button>
-                    </a>
+                    <a [routerLink]="['/create-category', id()]"><button class="add-category-btn"
+                            type="button">+</button></a>
                 </div>
             </div>
 
@@ -58,8 +57,9 @@
                 <div class="category-header">
                     <h2>{{ c.Name }}</h2>
 
-                    <a [routerLink]="['/new-product-page']"><button class="add-product-btn" type="button">+</button></a>
-                    <!-- (click)="createProduct(c.Id_Category)" -->
+                    <a [routerLink]="['/new-product-page', restaurant?.id, c.Id_Category]">
+                        <button class="add-product-btn" type="button">+</button>
+                    </a> <!-- (click)="createProduct(c.Id_Category)" -->
                 </div>
 
                 <div class="products-container-1">

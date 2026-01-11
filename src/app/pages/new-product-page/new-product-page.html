@@ -1,5 +1,5 @@
 <div class="flex-center">
-    <form>
+    <form #newProductForm="ngForm" (ngSubmit)="handleFormSubmission(newProductForm)">
 
         <h1>Crear Producto</h1>
 
@@ -7,7 +7,8 @@
 
             <div class="product-field">
                 <label for="name">Nombre *</label>
-                <input id="name" type="text" />
+                <textarea id="description" rows="4" name="description" ngModel></textarea>
+
             </div>
 
             <div class="product-field-full">
