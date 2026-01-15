@@ -10,4 +10,12 @@ import { ProductForReadDTO } from "../../interfaces/product-interface";
 })
 export class ProductCard {
   product = input.required<ProductForReadDTO>();
+
+  //Metodo para calcular descuento
+  getDiscountPrice() {
+    const p = this.product();
+    const descuentoPorcentaje = p.discount ?? 0;
+    return p.price - (p.price * descuentoPorcentaje / 100);
+  }
+
 }

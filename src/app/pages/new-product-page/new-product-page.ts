@@ -41,11 +41,6 @@ export class NewProductPage {
       id_Category: Number(this.categoryId()),
     };
 
-    console.log('form.value:', form.value);
-    console.log('description:', form.value.description);
-    console.log('urlImage:', form.value.urlImage);
-
-
     this.solicitudABackEnCurso = true;
     const ans = this.productService.createProduct(newProduct);
     this.solicitudABackEnCurso = false;
