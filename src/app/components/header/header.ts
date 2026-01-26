@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink, Router } from "@angular/router";
 import { Auth } from '../../services/auth-service';
 import { CommonModule } from '@angular/common';
@@ -30,14 +30,14 @@ export class Header {
   }
 
   deleteMyRestaurant() {
-  const id = this.auth.restaurantId;
-  if (!id) return;
+    const id = this.auth.restaurantId;
+    if (!id) return;
 
-  const ok = this.restaurantService.deleteResto(id);
-  if (!ok) { this.errorEnBack = true; return; }
+    const ok = this.restaurantService.deleteResto(id);
+    if (!ok) { this.errorEnBack = true; return; }
 
-  this.auth.logout();
-  this.router.navigate(['/']);
-}
+    this.auth.logout();
+    this.router.navigate(['/']);
+  }
 
 }

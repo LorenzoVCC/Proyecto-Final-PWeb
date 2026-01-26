@@ -51,6 +51,11 @@ export const routes: Routes = [
         canActivate: [ownerGuard],
       },
       {
+        path: "edit-product-page/:restaurantId/:categoryId/:productId",
+        component: NewProductPage,
+        canActivate: [ownerGuard],
+      },
+      {
         path: "product-page/:id",
         component: ProductPage,
       },

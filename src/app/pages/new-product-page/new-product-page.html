@@ -1,7 +1,7 @@
 <div class="flex-center">
     <form #newProductForm="ngForm" (ngSubmit)="handleFormSubmission(newProductForm)">
 
-        <h1>Crear Producto</h1>
+        <h1> {{ isEdit ? 'Editar Producto' : 'Crear Producto' }} </h1>
 
         <section id="product-data-container">
 
@@ -33,7 +33,7 @@
         </section>
 
         <div class="btn-newcat">
-            <button type="submit">Crear Producto</button>
+            <button type="submit">{{ isEdit ? 'Guardar Cambios' : 'Crear Producto' }}</button>
         </div>
 
     </form>

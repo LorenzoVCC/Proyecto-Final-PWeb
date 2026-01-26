@@ -12,11 +12,10 @@ export class RestaurantService {
       name: 'Restaurante 1',
       description: 'Descripción localhostDescripciónDescripción localhostDescripción localhostDescripción localhostDescripción localhostDescripción localhostDescripción localhostDescripción localhostDescripción localhostDescripción localhostDescripción localhost4200/',
       imageUrl: '/maldonal.jpg',
+      bgImage: '/comidas-fondo.jpg',
       address: 'Moreno 37',
       slug: 'res1-moreno',
-      bgImage: '/comidas-fondo.jpg',
       isActive: true
-
     },
     {
       id: 2,

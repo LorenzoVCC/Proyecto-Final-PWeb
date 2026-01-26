@@ -7,7 +7,11 @@ import { ProductService } from './product.service';
 export class CategoryService {
 
   private products = inject(ProductService);
-  private categories: CategoryForReadDTO[] = [];
+  private categories: CategoryForReadDTO[] = [
+    {Id_Category: 1,
+    Name: 'Shawarma',
+    Id_Restaurant: 1}
+  ];
 
   getByRestaurantId(restaurantId: number): CategoryForReadDTO[] {
     return this.categories.filter(c => c.Id_Restaurant === restaurantId);
@@ -46,7 +50,7 @@ export class CategoryService {
   deleteCategory(categoryId: number): boolean {
 
     this.products.deleteByCategoryId(categoryId);
-  
+
     const prev = this.categories.length;
     this.categories = this.categories.filter(c => c.Id_Category !== categoryId);
     return this.categories.length !== prev;

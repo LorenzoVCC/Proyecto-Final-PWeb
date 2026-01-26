@@ -75,11 +75,6 @@ export class RestaurantPage implements OnInit {
     }
   }
 
-  get selectedProducts() {  //Trae los productos de esa categoria
-    if (this.selectedCategoryId === null) return [];
-    return this.productService.getByCategoryId(this.selectedCategoryId);
-  }
-
   //Borrado
   deleteSelectedCategory() {
     if (!this.restaurant) return;
@@ -102,5 +97,9 @@ export class RestaurantPage implements OnInit {
     if (!this.restaurant) return;
     if (this.selectedCategoryId === null) return;
     this.router.navigate(['/edit-category', this.restaurant.id, this.selectedCategoryId]);
+  }
+
+  getProductsForCategory(categoryId: number) {  //Trae los productos de esa categoria
+    return this.productService.getByCategoryId(categoryId);
   }
 }

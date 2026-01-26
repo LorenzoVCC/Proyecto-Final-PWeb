@@ -80,7 +80,7 @@
                 </div>
 
                 <div class="products-container-1">
-                    @for (p of selectedProducts; track p.id_Product) {
+                    @for (p of getProductsForCategory(c.Id_Category); track p.id_Product) {
                     <product-card [product]="p"></product-card>
                     }
                     @empty {

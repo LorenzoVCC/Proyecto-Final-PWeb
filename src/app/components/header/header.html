@@ -17,8 +17,7 @@
                 </button>
 
                 <div class="dropdown" [class.open]="menuOpen">
-
-                    <div class="name"> {{ auth.current?.name }} </div>
+                    <a [routerLink]="['/restaurant-page' , auth.current?.id]"><div class="name"> {{ auth.current?.name }} </div></a>
 
                     <button type="button" [routerLink]="['/edit-restaurant', auth.current?.id]"
                         (click)="menuOpen = false">Editar Restaurante</button>

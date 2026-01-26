@@ -12,10 +12,45 @@
     flex-direction: column;
 }
 
+
+//Container de volver al menu
+.back-to-menu-btn { 
+    width: 100%;
+    display: flex;
+    padding-left: 50px;
+    padding-top: 20px;
+}
+
+.back-to-menu-btn button {
+    background-color: var(--primary);
+    border-radius: 99px;
+    border: 1px solid black;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    transition: .2s;
+    cursor: pointer;
+}
+.back-to-menu-btn button:hover {
+    background-color: var(--phover);
+}
+.back-to-menu-btn img {
+    width: 40px;
+}
+////////////////////////////
+
+.produc-data-btns {
+    width: 100vw;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-direction: column;
+}
+
 /*CONTENEDORES DE PRODUCTOS*/
 .product-data-container {
-    margin: 80px 0px;
-    background-color: rgb(245, 173, 39);
+ 
+    background-color: var(--phover);
     display: flex;
     width: 60%;
     min-height: 500px;
@@ -60,38 +95,37 @@
 }
 
 .product-price-discount { 
+    width: 100%;
     margin-top: auto;
-    align-self: flex-end;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    flex-direction: row;
+    align-self: flex-end;
     align-items: center;
     gap: 10px;
     padding-right: 30px;
-    width: auto;
+    font-size: 1.5em;
 }
 
-//Container de volver al menu
-.back-to-menu-btn { 
+span {
+    background-color: var(--cream);
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.owner-options {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
     width: 100%;
-    display: flex;
-    padding-left: 50px;
-    padding-top: 20px;
 }
-
-.back-to-menu-btn a {
+.owner-options button {
+    height: 5em;
+    width: 10em;
+    border-radius: 12px;
     background-color: var(--primary);
-    border-radius: 99px;
-    border: 1px solid black;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    transition: .2s;
+    transition: .3s;
 }
-.back-to-menu-btn a:hover {
+.owner-options button:hover {
     background-color: var(--phover);
-}
-
-
-.back-to-menu-btn img {
-    width: 40px;
 }

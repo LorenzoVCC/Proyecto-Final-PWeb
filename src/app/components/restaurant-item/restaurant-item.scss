@@ -12,8 +12,7 @@
 }
 
 .item-container:hover {
-    background-color: rgba(177, 187, 187, 0.732);
-    background-color: rgb(223, 166, 60);
+    background-color: var(--phover);
     box-shadow: 4px 8px 5px 0px rgba(0, 0, 0, 0.75);
 }
 

@@ -10,6 +10,7 @@ import { ProductPage } from "../../pages/product-page/product-page";
   styleUrl: './product-card.scss',
 })
 export class ProductCard {
+
   product = input.required<ProductForReadDTO>();
 
   //Metodo para calcular descuento

@@ -12,13 +12,11 @@
     }
 
     /**/
-    .back-to-menu-btn {
-        width: 100%;
-        display: flex;
-        padding-top: 20px;
-        padding-left: 50px;
-        padding-bottom: 50px;
-        align-items: center;
+    .back-to-menu-btn { 
+    width: 100%;
+    display: flex;
+    padding-left: 50px;
+    padding-top: 20px;
     }
 
     .back-to-menu-btn a {
@@ -117,7 +115,6 @@
     }
 
     .categories-container-1 {
-        background-color: rgba(231, 228, 228, 0.637);
         display: flex;
         gap: 20px;
         padding: 10px;
