@@ -52,14 +52,15 @@ export class ProductService {
       return [];
     }
 
-    if (!res.ok) {
-      this.products = [];
-      return [];
-    }
+    if (!res.ok) return [];
 
     const data = await res.json();
     const list = data.map((p: any) => this.mapProduct(p));
-    this.products = list;
+
+    this.products = [
+      ...this.products.filter(p => p.id_Category !== categoryId),
+      ...list
+    ];
     return list;
   }
   ///////////////////
@@ -164,5 +165,4 @@ export class ProductService {
   getCachedByCategoryId(categoryId: number) {
     return this.products.filter(p => p.id_Category === categoryId);
   }
-
 }

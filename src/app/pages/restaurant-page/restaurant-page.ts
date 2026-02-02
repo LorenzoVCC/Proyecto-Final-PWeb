@@ -40,8 +40,6 @@ export class RestaurantPage implements OnInit {
 
   categories: CategoryForReadDTO[] = [];
 
-
-  //Estado: Categoria Seleccionada
   selectedCategoryId: number | null = null;
 
   ///////////////
@@ -54,11 +52,16 @@ export class RestaurantPage implements OnInit {
       return;
     }
 
+    this.productService.products = [];
+
     this.restaurant = await this.restaurantService.getById(idNum) ?? undefined;
 
     if (this.restaurant) {
       this.categories = await this.categoryService.getByRestaurantId(this.restaurant.id);
 
+      for (const c of this.categories) {
+        await this.productService.getByCategoryId(c.Id_Category);
+      }
     } else {
       this.categories = [];
     }
@@ -66,7 +69,6 @@ export class RestaurantPage implements OnInit {
     this.selectedCategoryId = null;
     this.cargandoRestaurant = false;
   }
-
 
   /////////////// METODOS SELECT CATEGORY
   clearSelection() {
