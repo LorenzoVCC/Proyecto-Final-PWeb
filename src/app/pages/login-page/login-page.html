@@ -7,23 +7,26 @@
             </div>
         </div>
         <!--  -->
-        
+
         <div class="content-container">
             <h1>Ingresar</h1>
 
             <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-                
+
                 <!--  -->
                 <div class="user-credentials">
 
                     <div class="user-input">
                         <img src="/user.svg" alt="">
-                        <input id="email" type="text" name="email" placeholder="Correo" ngModel #email="ngModel" required="true">
+                        <input id="email" type="text" name="email" placeholder="Correo" ngModel #email="ngModel"
+                            required="true">
                     </div>
 
                     <div class="user-input">
                         <img src="/key.svg" alt="">
-                        <input id="password" name="password" type="password" autocomplete="current-password" ngModel #password="ngModel" required="true" minlength="4" autocomplete="current-password" placeholder="Clave">
+                        <input id="password" name="password" type="password" autocomplete="current-password" ngModel
+                            #password="ngModel" required="true" minlength="4" autocomplete="current-password"
+                            placeholder="Clave">
                     </div>
 
                 </div>
@@ -34,11 +37,12 @@
                 </div>
 
                 <div class="goto-register">
-                    <a routerLink="/register" id="forgot-pass">¿Olvidaste la contraseña?</a>
-                    <p>No tenés cuenta? <a routerLink="/register">Registrate</a></p>
+                    <a routerLink="/register">¿Olvidaste la contraseña?</a>
+                    <p>No tenés cuenta? <a class="registrate" routerLink="/register">Registrate</a></p>
                 </div>
             </form>
 
+            <p class="login__guest">¿Sos cliente? <a routerLink="/" class="login__guest-link">Entrar como invitado</a></p>
         </div>
     </section>
 </div>

@@ -140,7 +140,7 @@ input:-webkit-autofill:active {
     transition: .3s;
 }
 
-#ingresar:hover {
+#ingresar:hover , .registrate:hover{
     background-color: var(--cream);
     box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.75);
     border: none;
@@ -161,6 +161,12 @@ input:-webkit-autofill:active {
 .goto-register a {
     //links forgotpass y register
     text-align: center;
+}
+
+.registrate {
+    background-color: var(--cream);
     color: black;
-    text-decoration: none;
+    padding: 5px;
+    border-radius: 99px;
+    transition: .3s;
 }

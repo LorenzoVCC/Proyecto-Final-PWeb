@@ -24,8 +24,6 @@
     </div>
     <!--  -->
     <div class="restaurants-list">
-        <!-- Aca va el for -->
-
         @for (r of restaurants; track $index) {
         
             <a [routerLink]="['/restaurant-page', r.id]">
