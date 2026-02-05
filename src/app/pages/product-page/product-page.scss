@@ -95,6 +95,15 @@
   word-break: break-word;
 }
 
+.featuredProduct {
+    text-align: center;
+    padding: 10px;
+    font-size: 1.5em;
+    font-weight: 700;
+    border-radius: 99px;
+    background: var(--primary);
+}
+
 .product-price-discount { 
     width: 100%;
     margin-top: auto;

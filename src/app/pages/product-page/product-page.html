@@ -16,6 +16,12 @@
                 <h2> {{ product?.name }}</h2>
                 <p> {{ product?.description }} </p>
 
+                @if (product?.isFeatured) {
+                <div class="featured-sign">
+                    <span class="featuredProduct">Destacado ⭐</span>
+                </div>
+                }
+
                 <div class="product-price-discount">
 
                     <h4 class="original-price" [class.tachado]="product?.happyHour && (product?.discount ?? 0) > 0">
@@ -34,10 +40,12 @@
 
         @if (canEdit) {
         <div class="owner-options">
+            <button type="button" (click)="toggleFeatured()" [class.hh-active]="product?.isFeatured">
+                {{ product?.isFeatured ? 'Quitar destacado' : 'Destacar' }} </button>
 
             <button type="button" (click)="toggleHappyHour()" [class.hh-active]="product?.happyHour">
-            {{ product?.happyHour ? 'Happy Hour ON' : 'Happy Hour OFF' }} </button>
-            
+                {{ product?.happyHour ? 'Happy Hour ON' : 'Happy Hour OFF' }} </button>
+
             <button type="button" (click)="editProduct()">Editar</button>
             <button type="button" (click)="deleteProduct()">Eliminar</button>
         </div> }

@@ -205,5 +205,30 @@ export class ProductService {
 
     return true;
   }
+
+  async toggleFeatured(productId: number) {
+
+    const res = await fetch(`${this.URL_BASE}/${productId}/toggle-featured`, {
+      method: 'PATCH',
+      headers: {
+        Authorization: 'Bearer ' + this.auth.token,
+      },
+    });
+
+    if (res.status === 401) {
+      this.auth.logout();
+      return false;
+    }
+
+    if (!res.ok) return false;
+
+    this.products = this.products.map(p =>
+      p.id_Product === productId
+        ? { ...p, isFeatured: !p.isFeatured }
+        : p
+    );
+
+    return true;
+  }
 }
 

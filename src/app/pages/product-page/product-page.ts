@@ -73,6 +73,12 @@ export class ProductPage implements OnInit {
 
   //Metodos fuera de CRUD
   
+  getDiscountPrice(): number {
+    if (!this.product) return 0;
+    const descuentoPorcentaje = this.product.discount ?? 0;
+    return this.product.price - (this.product.price * descuentoPorcentaje / 100);
+  }
+
   async changeDiscount() {
     if (!this.canEdit || !this.product) return;
 
@@ -115,11 +121,17 @@ export class ProductPage implements OnInit {
     }
     this.product.happyHour = !this.product.happyHour;;
   }
-
-  getDiscountPrice(): number {
-    if (!this.product) return 0;
-    const descuentoPorcentaje = this.product.discount ?? 0;
-    return this.product.price - (this.product.price * descuentoPorcentaje / 100);
-  }
   
+  async toggleFeatured() {
+    if (!this.canEdit || !this.product) return;
+
+    const ok = await this.productService.toggleFeatured(this.product.id_Product);
+
+    if (!ok) {
+      this.errorEnBack = true;
+      return;
+    }
+
+    this.product.isFeatured = !this.product.isFeatured;
+  }
 }

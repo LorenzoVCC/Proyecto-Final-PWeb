@@ -20,5 +20,4 @@ export class ProductCard {
     const descuentoPorcentaje = p.discount ?? 0;
     return p.price - (p.price * descuentoPorcentaje / 100);
   }
-
 }
