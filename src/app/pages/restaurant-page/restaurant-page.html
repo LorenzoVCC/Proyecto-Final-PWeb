@@ -1,17 +1,17 @@
 <div class="flex-center">
 
-    <div class="back-to-menu-btn">
-        <a routerLink=""><img src="/back-to-menu.svg" alt=""></a>
+    <div class="back-to-menu-btn-container">
+        <a routerLink=""><img src="/assets/imgs/back-to-menu.svg" alt=""></a>
     </div>
 
     <!-- ////////////////////////////// -->
     <div class="main-container">
         <!-- //////////// BANNER  //////////// -->
         <section id="main-banner"
-            [style.background-image]="'url(' + (restaurant?.bgImage || '/restaurant-generic-img.jpg') + ')'">
+            [style.background-image]="'url(' + (restaurant?.bgImage || '/assets/imgs/restaurant-generic-img.jpg') + ')'">
 
             <div class="banner-info-positioning">
-                <img class="restaurant-logo" [src]="restaurant?.imageUrl || '/restaurant-generic-img.jpg'"
+                <img class="restaurant-logo" [src]="restaurant?.imageUrl || '/assets/imgs/restaurant-generic-img.jpg'"
                     alt="restaurant logo" />
 
                 <div class="banner-info">
@@ -27,7 +27,7 @@
 
             <div class="pills-plus">
                 <div class="categories-container-1">
-                    
+
                     @for (cat of categories; track $index) {
                     <category-pill [category]="cat" (click)="selectCategory(cat.Id_Category)"
                         [class.selected]="selectedCategoryId === cat.Id_Category"></category-pill>
@@ -44,7 +44,12 @@
                 <div class="category-btn-container">
                     <button class="add-category-btn btn-pencil" type="button" (click)="updateSelectedCategory()"
                         [disabled]="selectedCategoryId === null" [class.is-disabled]="selectedCategoryId === null">
-                        <img src="/pencil.svg" alt="">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="pencil-edit-cat">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                        </svg>
+
                     </button>
                     <button class="add-category-btn" type="button" (click)="deleteSelectedCategory()"
                         [disabled]="selectedCategoryId === null" [class.is-disabled]="selectedCategoryId === null">
@@ -75,7 +80,7 @@
                     @if (auth.token && auth.restaurantId === restaurant?.id) {
 
                     <a [routerLink]="['/new-product-page', restaurant?.id, c.Id_Category]">
-                        <button class="add-product-btn" type="button">+</button>
+                        <button class="add-category-btn" type="button">+</button>
                     </a> <!-- (click)="createProduct(c.Id_Category)" -->
                     }
                 </div>

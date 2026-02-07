@@ -1,7 +1,7 @@
 <div class="flex-center">
     <div class="back-to-menu-btn">
         <button class="button" type="button" (click)="backMenu()">
-            <img src="/back-to-menu.svg" alt=""></button>
+            <img src="/assets/imgs/back-to-menu.svg" alt=""></button>
     </div>
 
     <div class="produc-data-btns">
@@ -9,18 +9,19 @@
         <article class="product-data-container">
 
             <div class="product-img-container">
-                <img [src]="product?.urlImage || 'assets/restaurant-generic-img.jpg'" alt="imagen-producto" />
+                <img [src]="product?.urlImage || '/assets/imgs/restaurant-generic-img.jpg'" alt="imagen-producto" />
             </div>
 
             <div class="product-name-descrip">
                 <h2> {{ product?.name }}</h2>
-                <p> {{ product?.description }} </p>
 
                 @if (product?.isFeatured) {
                 <div class="featured-sign">
                     <span class="featuredProduct">Destacado ⭐</span>
                 </div>
                 }
+                
+                <p> {{ product?.description }} </p>
 
                 <div class="product-price-discount">
 

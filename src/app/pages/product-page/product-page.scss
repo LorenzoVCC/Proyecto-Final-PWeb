@@ -34,6 +34,20 @@
 .back-to-menu-btn button:hover {
     background-color: var(--phover);
 }
+
+:host-context(.theme-dark) .back-to-menu-btn button {
+    background-color: var(--d-cream);
+    color: #f4f2e8;
+    transition: 1s;
+}
+
+
+:host-context(.theme-dark) .back-to-menu-btn button:hover {
+    background-color: var(--d-primary);
+    color: #f4f2e8;
+    transition: 1s;
+}
+
 .back-to-menu-btn img {
     width: 40px;
 }
@@ -56,6 +70,11 @@
     min-height: 500px;
     border: 2px solid black;
     border-radius: 50px;
+
+}
+
+:host-context(.theme-dark) .product-data-container, :host-context(.theme-dark) .product-name-descrip {
+    background-color: var(--d-primary);
 }
 
 /*IMAGE*/
@@ -85,7 +104,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: var(--bgwhite);
+    background-color: var(--cream);
 }
 
 .product-name-descrip h2,
@@ -95,13 +114,23 @@
   word-break: break-word;
 }
 
+.featured-sign {
+    margin: 20px 0px;
+}
+
 .featuredProduct {
     text-align: center;
-    padding: 10px;
+    padding: 10px 20px;
     font-size: 1.5em;
     font-weight: 700;
     border-radius: 99px;
-    background: var(--primary);
+    background-color: var(--d-featured);
+}
+
+:host-context(.theme-dark) .featuredProduct {
+    background-color: var(--d-featured);
+    color: #f4f2e8;
+    transition: 1s;
 }
 
 .product-price-discount { 
@@ -123,9 +152,13 @@
 }
 
 .product-price-discount span {
-    background-color: var(--primary);
-    padding: 5px 10px;
+    background-color: var(--d-hh);
+    padding: 5px 20px;
     border-radius: 20px;
+}
+
+:host-context(.theme-dark) .product-price-discount span {
+    background-color: var(--d-hh);
 }
 
 .owner-options {
@@ -140,12 +173,33 @@
     border-radius: 12px;
     background-color: var(--primary);
     transition: .6s;
+    cursor: pointer;
+    font-size: 1em;
 }
+
+:host-context(.theme-dark) .owner-options button {
+  background-color: var(--d-pill);
+  color: white;
+  cursor: pointer;
+}
+
+:host-context(.theme-dark) .owner-options button:hover {
+  background-color: var(--d-primary);
+}
+
 .owner-options button:hover {
     background-color: var(--phover);
 }
+
 .owner-options button.hh-active {
   background-color: var(--phover);
+  border: 2px solid black;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.15);
+}
+
+
+:host-context(.theme-dark) .owner-options button.hh-active {
+  background-color: var(--d-primary);
   border: 2px solid black;
   box-shadow: 0 0 0 3px rgba(0,0,0,0.15);
 }

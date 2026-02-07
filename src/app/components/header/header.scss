@@ -26,16 +26,16 @@
   background-color: var(--d-primary);     
   color: #f4f2e8;
   transition: 1s;
-  font-family: var(--bqfont);
 }
 
-:host-context(.theme-dark) .header__link {
+:host-context(.theme-dark) .header__link, .header__dropdown-item {
   color: #f4f2e8;
 }
 
 :host-context(.theme-dark) .header__dropdown {
   background: var(--d-primary);
   border-color: rgba(255,255,255,.15);
+  color: #f4f2e8;
 }
 
 .header__brand {
@@ -46,7 +46,7 @@
 
 
 .header__logo {
-  width: 100px;
+  width: 130px;
   padding-left: 30px;
   display: block;
 }

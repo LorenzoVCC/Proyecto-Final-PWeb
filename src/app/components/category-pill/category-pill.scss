@@ -1,7 +1,7 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .category-pill {
@@ -15,11 +15,23 @@
 }
 
 :host(.selected) .category-pill {
-  background-color: var(--phover);    
+  background-color: var(--phover);
   box-shadow: 0 0 0 1.5px rgba(0, 0, 0, .8);
 }
 
 .category-pill:hover {
-    background-color: var(--phover);
-    cursor: pointer;
+  background-color: var(--phover);
+  cursor: pointer;
+}
+
+:host-context(.theme-dark) .category-pill {
+  background-color: var(--d-pill);
+  color: #f4f2e8;
+  transition: 1s;
+}
+
+ 
+:host-context(.theme-dark) :host(.selected) .category-pill {
+  background-color: var(--d-primary);
+  box-shadow: 0 0 0 1.5px rgba(0, 0, 0, .8);
 }

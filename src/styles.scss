@@ -14,10 +14,11 @@
     --cream: #f0f0dd;
     --secondary: #e2e4d1;
     --bgwhite: #f0ebe1;
-    --featured: gold;
-    --hh: rgb(237, 164, 38);
+    --d-hh: rgb(237, 164, 38);
+    --d-hhprice: #db3210;
+    --d-featured: rgb(187, 223, 23);
 
-    --bqfont: 'bqfont', sans-serif;
+    --bqfont: 'bqfont', sans-serif; 
     --font-sans: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --nexa: "nexa", sans-serif;
 
@@ -25,13 +26,17 @@
 }
 
 body.theme-dark {
+    --dark-restaurant-item: rgb(57, 52, 50);
+ 
     --d-primary: #740c0c;
-    --d-phover: #a40a0a;
-    --d-cream: #3e3e2f;
-    --d-secondary: #2f2f25;
-    --d-bgwhite: #1c1c1c;
-    --d-featured: #b8860b;
+    --d-phover: #1e1b1b;
+    --d-cream: #404039;
+    --d-pill: #581414;
+    --d-product: #2d2525;
+    
+    --d-restaurant-page-bg: #2f2828;
     --d-hh: rgb(180, 101, 21);
+    --d-featured: rgb(168, 150, 44);
 
     --bqfont: 'bqfont', sans-serif;
     --font-sans: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;

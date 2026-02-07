@@ -11,8 +11,21 @@
     cursor: pointer;
 }
 
+/* Dark*/
+:host-context(.theme-dark) .item-container {
+  background-color: var(--dark-restaurant-item);     
+  color: #f4f2e8;
+  transition: 1s;
+}
+
+:host-context(.theme-dark) .item-container:hover {
+    background-color: var(--d-cream);
+    box-shadow: 4px 8px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+
 .item-container:hover {
-    background-color: var(--phover);
+    background-color: var(--d-phover);
     box-shadow: 4px 8px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
@@ -32,7 +45,6 @@
 .restaurant-info-container p {
     width: 100%;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     margin: 0;
     line-height: 1.2;

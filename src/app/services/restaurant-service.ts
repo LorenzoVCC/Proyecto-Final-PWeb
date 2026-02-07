@@ -17,7 +17,7 @@ export class RestaurantService {
       id: r.id ?? r.id_Restaurant ?? r.idRestaurant,
       name: r.name ?? r.Name,
       description: r.description ?? r.Description ?? '',
-      imageUrl: r.imageUrl ?? r.imageURL ?? r.ImageURL ?? '/restaurant-generic-img.jpg',
+      imageUrl: r.imageUrl ?? r.imageURL ?? r.ImageURL ?? '/assets/imgs/restaurant-generic-img.jpg',
       bgImage: r.bgImage ?? r.bGImage ?? r.BGImage ?? '/comidas-fondo.jpg',
       address: r.address ?? r.Address ?? '',
       slug: r.slug ?? r.Slug ?? '',

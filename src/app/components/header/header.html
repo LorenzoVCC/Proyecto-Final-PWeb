@@ -1,15 +1,11 @@
 <header class="header">
   <a class="header__brand" routerLink="/">
-    <img class="header__logo" src="/moto-logo.png" alt="Logo">
+    <img class="header__logo" src="/assets/imgs/moto-logo.png" alt="Logo">
     <h1>Saboriza2</h1>
   </a>
 
   <nav class="header__nav" aria-label="Navegación principal">
     <ul class="header__menu">
-      <li class="header__item">
-        <a class="header__link" routerLink="">Inicio</a>
-      </li>
-
       @if (!auth.token) {
       <li class="header__item">
         <a class="header__link" routerLink="/login">Ingresar</a>
