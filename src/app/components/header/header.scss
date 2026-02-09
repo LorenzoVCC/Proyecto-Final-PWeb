@@ -28,7 +28,7 @@
   transition: 1s;
 }
 
-:host-context(.theme-dark) .header__link, .header__dropdown-item {
+:host-context(.theme-dark) .header__link, :host-context(.theme-dark) .header__dropdown-item {
   color: #f4f2e8;
 }
 
@@ -100,7 +100,6 @@
   top: calc(100% + 8px);
   right: 0;
   z-index: 9999;
-
   min-width: 160px;
   background: #fff;
   border: 1px solid rgba(0, 0, 0, .15);
@@ -130,6 +129,8 @@
   border-radius: 8px;
   cursor: pointer;
   font-size: .8em;
+  color: black;
+  transition: 1s ease;
 }
 
 .header__dropdown-item:hover {

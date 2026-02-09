@@ -65,9 +65,36 @@
 
         </section>
 
+        <!-- ////////////// SEARCHBAR ////////////// -->
+        <div class="searchbar-container">
+            <input type="text" class="searchbar" placeholder="Buscar productos..."
+            (input)="onSearchInput($any($event.target).value)" />
+        </div>
+
+
         <!-- /////////////////CONTAINER Y PRODUCT CARDS//////////////// -->
 
         <section id="products-container-0">
+
+            @if (searchText.trim()) {
+
+            <!-- MODO BÚSQUEDA -->
+            <section class="container-for-category">
+                <div class="category-header">
+                    <h2>Resultados</h2>
+                </div>
+
+                <div class="products-container-1">
+                    @for (p of searchResults; track p.id_Product) {
+                    <product-card [product]="p"></product-card>
+                    }
+                    @empty {
+                    <p>No se encontraron productos.</p>
+                    }
+                </div>
+            </section>
+
+            } @else {
 
             @for (c of categories; track c.Id_Category) {
 
@@ -78,10 +105,9 @@
                     <h2>{{ c.Name }}</h2>
 
                     @if (auth.token && auth.restaurantId === restaurant?.id) {
-
                     <a [routerLink]="['/new-product-page', restaurant?.id, c.Id_Category]">
                         <button class="add-category-btn" type="button">+</button>
-                    </a> <!-- (click)="createProduct(c.Id_Category)" -->
+                    </a>
                     }
                 </div>
 
@@ -96,12 +122,13 @@
 
             </section>
             }
+
             }
-            @empty
-            {
+            @empty {
             <p>No hay categorías para mostrar productos.</p>
             }
 
+            }
         </section>
     </div>
 </div>

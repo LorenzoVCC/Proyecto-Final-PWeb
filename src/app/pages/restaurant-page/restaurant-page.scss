@@ -175,7 +175,6 @@
         scrollbar-width: none;
     }
 
-
     .category-btn-container {
         display: flex;
         align-items: center;
@@ -184,12 +183,25 @@
     }
 
     /*PRODUCTS*/
-    #products-container-0 {
+    #products-container-0, .searchbar-container {
         background-color: rgba(231, 228, 228, 0.637);
         gap: 50px;
         padding: 20px;
         display: flex;
         flex-direction: column;
+    }
+
+    :host-context(.theme-dark) .searchbar-container {
+        background-color: var(--d-restaurant-page-bg);
+        color: #f4f2e8;
+        transition: 1s;
+    }
+
+    .searchbar {
+        width: 50%;
+        padding: 15px;
+        border-radius: 99px;
+        border: none;
     }
 
     :host-context(.theme-dark) #products-container-0 {

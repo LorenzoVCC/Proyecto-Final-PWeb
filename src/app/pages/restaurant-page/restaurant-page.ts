@@ -29,6 +29,7 @@ export class RestaurantPage implements OnInit {
 
   auth = inject(Auth);
   router = inject(Router);
+
   private categoryService = inject(CategoryService);
   private productService = inject(ProductService);
 
@@ -39,8 +40,41 @@ export class RestaurantPage implements OnInit {
   cargandoRestaurant = false;
 
   categories: CategoryForReadDTO[] = [];
-
   selectedCategoryId: number | null = null;
+
+  searchText = '';
+  searching = false;
+  searchResults: any[] = [];
+  private searchTimeout: any = null;
+  private searchRequestId = 0;
+
+  onSearchInput(value: string) {
+    this.searchText = value;
+    if (!this.searchText.trim()) {
+      this.searching = false;
+      this.searchResults = [];
+      clearTimeout(this.searchTimeout);
+      return;
+    }
+
+    clearTimeout(this.searchTimeout);
+    this.searchTimeout = setTimeout(async () => {
+      if (!this.restaurant) return;
+
+      const reqId = ++this.searchRequestId;
+      this.searching = true;
+
+      const results = await this.productService.searchProducts({
+        restaurantId: this.restaurant.id,
+        q: this.searchText,
+      });
+
+      if (reqId !== this.searchRequestId) return;
+
+      this.searchResults = results;
+    }, 300);
+
+  }
 
   ///////////////
   async ngOnInit() {
@@ -67,6 +101,12 @@ export class RestaurantPage implements OnInit {
     }
 
     this.selectedCategoryId = null;
+
+    this.searchText = '';
+    this.searching = false;
+    this.searchResults = [];
+    clearTimeout(this.searchTimeout);
+
     this.cargandoRestaurant = false;
   }
 

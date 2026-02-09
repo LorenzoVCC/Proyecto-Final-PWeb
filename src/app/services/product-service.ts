@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Auth } from './auth-service';
 import { ProductForCreateUpdateDTO, ProductForReadDTO } from '../interfaces/product-interface';
 import { API_URL } from '../config/api';
+import { RestaurantItem } from '../components/restaurant-item/restaurant-item';
 
 @Injectable({ providedIn: 'root' })
 
@@ -229,6 +230,45 @@ export class ProductService {
     );
 
     return true;
+  }
+
+  async searchProducts(params: 
+  { 
+    restaurantId?: number;
+    q?: string;
+    categoryId?: number;
+    happyHour?: boolean;
+    featured?: boolean;
+    minPrice?: number;
+    maxPrice?: number;
+  }) 
+  {
+    const qs = new URLSearchParams();
+    qs.set('RestaurantId', String(params.restaurantId));
+
+    if (params.q?.trim()) qs.set('Q', params.q.trim());
+    if (params.categoryId != null) qs.set('CategoryId', String(params.categoryId));
+    if (params.featured != null) qs.set('Featured', String(params.featured));
+    if (params.happyHour != null) qs.set('HappyHour', String(params.happyHour));
+    if (params.minPrice != null) qs.set('MinPrice', String(params.minPrice));
+    if (params.maxPrice != null) qs.set('MaxPrice', String(params.maxPrice));
+
+    const res = await fetch(`${this.URL_BASE}/search?${qs.toString()}`, {
+      method: 'GET',
+      headers: { Authorization: 'Bearer ' + this.auth.token },
+    });
+
+    if (res.status === 401) {
+      this.auth.logout();
+      this.products = [];
+      return [];
+    }
+
+    if (!res.ok) return [];
+
+    const data = await res.json();
+    const list = data.map((p: any) => this.mapProduct(p));
+    return list;
   }
 }
 
