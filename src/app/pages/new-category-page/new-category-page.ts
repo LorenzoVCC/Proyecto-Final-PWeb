@@ -2,7 +2,6 @@ import { Component, inject, input, OnInit, viewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
-
 import { CategoryService } from '../../services/category-service';
 import { CategoryCreateUpdateDTO, CategoryForReadDTO } from '../../interfaces/category-interface';
 import { Auth } from '../../services/auth-service';
@@ -109,7 +108,7 @@ export class NewCategoryPage implements OnInit {
       this.router.navigate(['/restaurant-page', urlRestaurantId]);
       return;
     }
-    const created = this.categoryService.createCategory(dto, loggedRestaurantId);
+    const created = await this.categoryService.createCategory(dto, loggedRestaurantId);
     this.solicitudABackEnCurso = false;
 
     if (!created) {

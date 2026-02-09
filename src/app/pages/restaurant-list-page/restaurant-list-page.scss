@@ -52,28 +52,6 @@ a {
   text-decoration: none;
 }
 
-#btn-filters {
-  width: 100px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 99px;
-  border: 1px solid black;
-  background-color: white;
-  padding: 7px;
-  transition: 0.5s;
-}
-
-#btn-filters img {
-  //SVG FILTROS
-  width: 20px;
-}
-
-#btn-filters:hover {
-  background: var(--primary);
-  box-shadow: 2px 5px 5px 0px rgba(0, 0, 0, 0.75);
-}
-
 #restaurants-container {
   //Container con h2 incluido
   align-items: center;

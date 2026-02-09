@@ -50,3 +50,24 @@ body {
     font-family: var(--font-sans);
     margin: 0;
 }
+
+.swal-popup {
+    background-color: var(--cream);
+    border: 1px solid black;
+}
+
+.swal-title {
+    color: var(--primary);
+    font-size: 1.5em;
+}
+
+.swal-confirm {
+    background-color: var(--primary);
+    color: white;
+}
+
+body.theme-dark .swal-popup {
+  background: #111;
+  color: #fff;
+  border: 1px solid white;
+}

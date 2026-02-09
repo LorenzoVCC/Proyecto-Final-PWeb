@@ -68,7 +68,7 @@
                         #password2="ngModel" minlength="4" autocomplete="new-password">
 
                     @if (password2.value !== password.value) {
-                        <p class="error">Las contraseñas deben coincidir.</p>
+                    <p class="error">Las contraseñas deben coincidir.</p>
                     }
                 </div>
             </div>
@@ -115,6 +115,12 @@
             <button id="agregar" type="submit">
                 {{ isEdit ? 'Guardar Cambios' : 'Registrarse' }}
             </button>
+
+            @if (solicitudABackEnCurso) {
+            <div class="spinner-container">
+                <app-spinner></app-spinner>
+            </div>
+            }
 
             @if (registerForm.invalid && registerForm.submitted) {
             <p class="errorSubmit">Por favor, complete todos los campos requeridos correctamente.</p>

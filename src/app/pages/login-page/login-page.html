@@ -32,13 +32,17 @@
                 </div>
                 <!--  -->
                 <div class="button-ingresar-container">
-
-                    <button id="ingresar" type="submit">Ingresar</button>
+                    <button id="ingresar" type="submit" [disabled]="solicitudABackEnCurso">Ingresar</button>
                 </div>
 
+                @if (solicitudABackEnCurso) {
+                <div class="spinner-container">
+                    <app-spinner></app-spinner>
+                </div>
+                }
 
                 @if (errorlogin) {
-                    <p class="error">Datos de sesión incorrectos, intente nuevamente.</p>
+                <p class="error">Datos de sesión incorrectos, intente nuevamente.</p>
                 }
 
                 <div class="goto-register">

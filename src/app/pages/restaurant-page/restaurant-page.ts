@@ -11,6 +11,9 @@ import { CategoryPill } from '../../components/category-pill/category-pill';
 import { CategoryService } from '../../services/category-service';
 import { CategoryForReadDTO } from '../../interfaces/category-interface';
 
+import Swal from 'sweetalert2';
+import { Toast } from '../../utils/modals.ts';
+
 import { Auth } from '../../services/auth-service';
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -132,8 +135,31 @@ export class RestaurantPage implements OnInit {
     if (!cat) return;
     if (cat.Id_Restaurant !== this.restaurant.id) return;
 
+    const result = await Swal.fire({
+      title: '¿Eliminar categoría?',
+      text: 'Esta acción no se puede deshacer.',
+      icon: 'error',
+      showCancelButton: true,
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar',
+      customClass: {
+        popup: 'swal-popup',
+        title: 'swal-title',
+        confirmButton: 'swal-confirm',
+        cancelButton: 'swal-cancel',
+      }
+    });
+
+    if (!result.isConfirmed) return;
+
     const deleted = await this.categoryService.deleteCategory(this.selectedCategoryId);
-    if (!deleted) return;
+    
+    if (!deleted) {
+      Toast.fire({icon: 'error', title: 'No se pudo eliminar la categoría'});
+      return;
+    };
+
+    Toast.fire({icon: 'success', title: 'Categoría eliminada'});
 
     this.categories = await this.categoryService.getByRestaurantId(this.restaurant.id);
     this.selectedCategoryId = null;
@@ -152,5 +178,4 @@ export class RestaurantPage implements OnInit {
   getProductsForCategoryView(categoryId: number) {
     return this.productService.getCachedByCategoryId(categoryId);
   }
-
 }

@@ -8,6 +8,10 @@ import { CategoryService } from '../../services/category-service';
 import { ProductService } from '../../services/product-service';
 import { ProductForReadDTO } from '../../interfaces/product-interface';
 
+import Swal from 'sweetalert2';
+import { Toast } from '../../utils/modals.ts';
+////////////////////////////////////////////////////////////////////////////////
+
 @Component({
   selector: 'product-page',
   standalone: true,
@@ -56,23 +60,46 @@ export class ProductPage implements OnInit {
       this.router.navigate(['']);
     }
   }
-
+  
   editProduct() {
     if (!this.canEdit || !this.product || this.restaurantBack === null) return;
     this.router.navigate(['/edit-product-page', this.restaurantBack, this.product.id_Category, this.product.id_Product]);
   }
-
-  deleteProduct() {
+  
+  async deleteProduct() {
     if (!this.canEdit || !this.product) return;
-
+    
+    const result = await Swal.fire({
+      title: '¿Eliminar producto?',
+      text: 'Esta acción no se puede deshacer.',
+      icon: 'error',
+      showCancelButton: true,
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar',
+      customClass: {
+        popup: 'swal-popup',
+        title: 'swal-title',
+        confirmButton: 'swal-confirm',
+        cancelButton: 'swal-cancel',
+      }
+    });
+    
+    if (!result.isConfirmed) return;
+    
     const ok = this.productService.deleteProduct(this.product.id_Product);
-    if (!ok) return;
-
+    
+    if (!ok) {
+      Toast.fire({icon: 'error', title: 'No se pudo eliminar el producto'});
+      return;
+    }
+    
+    Toast.fire({icon: 'success', title: 'Producto eliminado'});
+    
     this.backMenu();
   }
-
-  //Metodos fuera de CRUD
   
+  
+  //Metodos fuera de CRUD
   getDiscountPrice(): number {
     if (!this.product) return 0;
     const descuentoPorcentaje = this.product.discount ?? 0;
@@ -98,16 +125,16 @@ export class ProductPage implements OnInit {
       this.product.id_Product,
       discount
     );
-    
+
     if (!ok) {
       this.errorEnBack = true;
       return;
     }
-    
+
     // reflejo inmediato en UI
     this.product.discount = discount;
   }
-  
+
   async toggleHappyHour() {
     if (!this.product) return;
 
@@ -121,7 +148,7 @@ export class ProductPage implements OnInit {
     }
     this.product.happyHour = !this.product.happyHour;;
   }
-  
+
   async toggleFeatured() {
     if (!this.canEdit || !this.product) return;
 

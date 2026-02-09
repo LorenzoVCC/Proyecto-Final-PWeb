@@ -30,7 +30,12 @@
   transition: 1s;
 }
 
- 
+:host-context(.theme-dark) .category-pill:hover {
+  background-color: var(--d-primary);
+  color: #f4f2e8;
+  transition: .5s;
+}
+
 :host-context(.theme-dark) :host(.selected) .category-pill {
   background-color: var(--d-primary);
   box-shadow: 0 0 0 1.5px rgba(0, 0, 0, .8);

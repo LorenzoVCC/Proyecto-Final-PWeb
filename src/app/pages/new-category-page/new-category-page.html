@@ -15,13 +15,13 @@
 
     <div class="btn-newcat">
       <button type="submit" [disabled]="solicitudABackEnCurso">Aceptar</button>
-
-      @if (errorEnBack) {
-      <p class="error">Ocurrió un error. Verificá los datos e intentá nuevamente.</p>
-      }
-
     </div>
 
+    @if (solicitudABackEnCurso) {
+    <div class="spinner-container">
+      <app-spinner></app-spinner>
+    </div>
+    }
   </form>
 
 </div>

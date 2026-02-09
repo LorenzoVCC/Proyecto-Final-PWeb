@@ -34,6 +34,7 @@ export class RestaurantService {
     return data.map((r: any) => this.mapRestaurant(r));
   }
 
+  ////////////////////
   async getById(id: number) {
     const res = await fetch(`${API_URL}/api/Restaurant/${id}`, {
       method: 'GET',

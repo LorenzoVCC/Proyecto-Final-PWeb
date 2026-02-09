@@ -19,13 +19,12 @@
 }
 
 :host-context(.theme-dark) .item-container:hover {
-    background-color: var(--d-cream);
+    background-color: var(--d-primary);
     box-shadow: 4px 8px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
-
 .item-container:hover {
-    background-color: var(--d-phover);
+    background-color: var(--phover);
     box-shadow: 4px 8px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
