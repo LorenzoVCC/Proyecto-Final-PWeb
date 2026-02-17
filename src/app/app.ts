@@ -21,6 +21,6 @@
         this.auth.revisionTokenInterval = this.auth.revisionToken();
       }
       
-      this.theme.init();
+      // this.theme.init();
     }
   }

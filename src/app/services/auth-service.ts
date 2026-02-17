@@ -15,7 +15,7 @@ export class Auth {
     return this.token !== null;
   }
 
-  async login(loginData: RestaurantLoginDTO) {
+    async login(loginData: RestaurantLoginDTO) {
 
     const res = await fetch(`${API_URL}/api/authentication`, {
       method: "POST",

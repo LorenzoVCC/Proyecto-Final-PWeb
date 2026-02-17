@@ -2,10 +2,18 @@ import { inject, Injectable } from '@angular/core';
 import { Auth } from './auth-service';
 import { ProductForCreateUpdateDTO, ProductForReadDTO } from '../interfaces/product-interface';
 import { API_URL } from '../config/api';
-import { RestaurantItem } from '../components/restaurant-item/restaurant-item';
+
+export type ProductSearchParams = {
+  RestaurantId?: number;  // SOLO si lo agregás en back
+  CategoryId?: number;
+  HappyHour?: boolean;
+  Featured?: boolean;
+  MinPrice?: number;
+  MaxPrice?: number;
+  Q?: string;
+};
 
 @Injectable({ providedIn: 'root' })
-
 export class ProductService {
   auth = inject(Auth);
   readonly URL_BASE = `${API_URL}/api/Product`;
@@ -42,6 +50,7 @@ export class ProductService {
     const data = await res.json();
     return this.mapProduct(data);
   }
+
   ///////////////////
   async getByCategoryId(categoryId: number) {
     const res = await fetch(`${this.URL_BASE}/by-category/${categoryId}`, {
@@ -232,8 +241,7 @@ export class ProductService {
     return true;
   }
 
-  async searchProducts(params: 
-  { 
+  async searchProducts(params: {
     restaurantId?: number;
     q?: string;
     categoryId?: number;
@@ -241,10 +249,11 @@ export class ProductService {
     featured?: boolean;
     minPrice?: number;
     maxPrice?: number;
-  }) 
-  {
+  }): Promise<ProductForReadDTO[]> {
+
     const qs = new URLSearchParams();
-    qs.set('RestaurantId', String(params.restaurantId));
+
+    // if (params.restaurantId != null) qs.set('RestaurantId', String(params.restaurantId));
 
     if (params.q?.trim()) qs.set('Q', params.q.trim());
     if (params.categoryId != null) qs.set('CategoryId', String(params.categoryId));
@@ -267,8 +276,7 @@ export class ProductService {
     if (!res.ok) return [];
 
     const data = await res.json();
-    const list = data.map((p: any) => this.mapProduct(p));
-    return list;
+    return data.map((p: any) => this.mapProduct(p));
   }
 }
 

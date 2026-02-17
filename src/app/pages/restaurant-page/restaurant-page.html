@@ -66,9 +66,52 @@
         </section>
 
         <!-- ////////////// SEARCHBAR ////////////// -->
-        <div class="searchbar-container">
-            <input type="text" class="searchbar" placeholder="Buscar productos..."
-            (input)="onSearchInput($any($event.target).value)" />
+        <div class="searchbar-container main-searchbar">
+
+            <div class="searchbar-products-container">
+                <input type="text" class="searchbar" placeholder="Buscar productos..."
+                    (input)="onSearchInput($event)" />
+            </div>
+
+            <div class="filters-btn-container" (click)="toggleFilters()">
+                <img src="/assets/imgs/filters.svg" alt="Filtros">
+            </div>
+
+
+            @if (filtersOpen) {
+            <div class="filters-dropdown">
+                <div class="row">
+                    <label>Min</label>
+                    <input type="number" [(ngModel)]="minPrice" name="minPrice">
+                </div>
+
+                <div class="row">
+                    <label>Max</label>
+                    <input type="number" [(ngModel)]="maxPrice" name="maxPrice">
+                </div>
+
+                <div class="checkbox-row">
+                    <label>
+                        <input type="checkbox" class="check" [(ngModel)]="onlyFeatured" name="onlyFeatured">
+                        Solo destacados
+                    </label>
+                </div>
+
+                <div class="checkbox-row">
+                    <label>
+                        <input type="checkbox" class="check" [(ngModel)]="onlyHappyHour" name="onlyHappyHour">
+                        Solo happy hour
+                    </label>
+                </div>
+
+                <div class="buttons-filters">
+                    <button type="button" (click)="applyFilters()">Aplicar</button>
+                    <button type="button" (click)="clearFilters()">Limpiar</button>
+                </div>
+            </div>
+            }
+
+
         </div>
 
 
@@ -76,9 +119,8 @@
 
         <section id="products-container-0">
 
-            @if (searchText.trim()) {
+            @if (searching) {
 
-            <!-- MODO BÚSQUEDA -->
             <section class="container-for-category">
                 <div class="category-header">
                     <h2>Resultados</h2>
@@ -93,6 +135,7 @@
                     }
                 </div>
             </section>
+
 
             } @else {
 

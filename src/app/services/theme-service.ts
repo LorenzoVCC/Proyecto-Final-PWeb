@@ -28,6 +28,7 @@ export class ThemeService {
   isDark(): boolean {
     const current = (localStorage.getItem(this.themeMode) as Theme) || 'light';
     return current === 'dark';
+
   }
 
 }

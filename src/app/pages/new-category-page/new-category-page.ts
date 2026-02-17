@@ -119,5 +119,4 @@ export class NewCategoryPage implements OnInit {
     form.resetForm();
     this.router.navigate(['/restaurant-page', urlRestaurantId]);
   }
-
 }

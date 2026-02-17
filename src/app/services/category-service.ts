@@ -35,6 +35,7 @@ export class CategoryService {
       this.categories = [];
       return [];
     }
+    
     if (!res.ok) {
       this.categories = [];
       return [];

@@ -1,11 +1,13 @@
 import { Component, inject, input, OnInit } from '@angular/core';
 import { RouterLink, Router } from "@angular/router";
+import { FormsModule } from '@angular/forms';
 
 import { RestaurantService } from '../../services/restaurant-service';
 import { RestaurantForReadDTO } from '../../interfaces/restaurant-interface';
 
 import { ProductCard } from '../../components/product-card/product-card';
 import { ProductService } from '../../services/product-service';
+import { ProductForReadDTO } from '../../interfaces/product-interface';
 
 import { CategoryPill } from '../../components/category-pill/category-pill';
 import { CategoryService } from '../../services/category-service';
@@ -16,18 +18,13 @@ import { Toast } from '../../utils/modals.ts';
 
 import { Auth } from '../../services/auth-service';
 
-////////////////////////////////////////////////////////////////////////////////
-
 @Component({
   selector: 'restaurant-page',
   standalone: true,
-  imports: [CategoryPill, ProductCard, RouterLink],
+  imports: [CategoryPill, ProductCard, RouterLink, FormsModule],
   templateUrl: './restaurant-page.html',
   styleUrl: './restaurant-page.scss',
 })
-
-////////////////////////////////////////////////////////////////////////////////
-
 export class RestaurantPage implements OnInit {
 
   auth = inject(Auth);
@@ -47,15 +44,96 @@ export class RestaurantPage implements OnInit {
 
   searchText = '';
   searching = false;
-  searchResults: any[] = [];
+
+  searchResults: ProductForReadDTO[] = [];
+  featuredResults: ProductForReadDTO[] = [];
+
   private searchTimeout: any = null;
   private searchRequestId = 0;
 
-  onSearchInput(value: string) {
-    this.searchText = value;
-    if (!this.searchText.trim()) {
+  filtersOpen = false;
+
+  minPrice: number | null = null;
+  maxPrice: number | null = null;
+  onlyFeatured = false;
+  onlyHappyHour = false;
+
+  toggleFilters() {
+    this.filtersOpen = !this.filtersOpen;
+  }
+
+  clearFilters() {
+    this.minPrice = null;
+    this.maxPrice = null;
+    this.onlyFeatured = false;
+    this.onlyHappyHour = false;
+
+    this.searching = false;
+    this.searchResults = [];
+    this.featuredResults = [];
+    clearTimeout(this.searchTimeout);
+
+    this.filtersOpen = false;
+  }
+
+  private hasAnyFilterApplied(): boolean {
+    return !!this.searchText.trim()
+      || this.minPrice !== null
+      || this.maxPrice !== null
+      || this.onlyFeatured
+      || this.onlyHappyHour
+      || this.selectedCategoryId !== null;
+  }
+
+  async applyFilters() {
+    if (!this.restaurant) return;
+
+    if (!this.hasAnyFilterApplied()) {
       this.searching = false;
       this.searchResults = [];
+      this.featuredResults = [];
+      this.filtersOpen = false;
+      return;
+    }
+
+    const reqId = ++this.searchRequestId;
+
+    const results = await this.productService.searchProducts({
+      restaurantId: this.restaurant.id,
+      q: this.searchText?.trim() || undefined,
+      categoryId: this.selectedCategoryId ?? undefined,
+      featured: this.onlyFeatured ? true : undefined,
+      happyHour: this.onlyHappyHour ? true : undefined,
+      minPrice: this.minPrice ?? undefined,
+      maxPrice: this.maxPrice ?? undefined,
+    });
+
+    if (reqId !== this.searchRequestId) return;
+
+    this.searchResults = results;
+    this.featuredResults = [];
+
+
+    this.searching = true;
+    this.filtersOpen = false;
+  }
+
+  onSearchInput(ev: Event) {
+    const value = (ev.target as HTMLInputElement | null)?.value ?? '';
+    this.searchText = value;
+
+    const noFilters =
+      !this.searchText.trim()
+      && this.minPrice === null
+      && this.maxPrice === null
+      && !this.onlyFeatured
+      && !this.onlyHappyHour
+      && this.selectedCategoryId === null;
+
+    if (noFilters) {
+      this.searching = false;
+      this.searchResults = [];
+      this.featuredResults = [];
       clearTimeout(this.searchTimeout);
       return;
     }
@@ -65,21 +143,26 @@ export class RestaurantPage implements OnInit {
       if (!this.restaurant) return;
 
       const reqId = ++this.searchRequestId;
-      this.searching = true;
 
       const results = await this.productService.searchProducts({
-        restaurantId: this.restaurant.id,
-        q: this.searchText,
+        // restaurantId: this.restaurant.id,
+        q: this.searchText?.trim() || undefined,
+        categoryId: this.selectedCategoryId ?? undefined,
+        featured: this.onlyFeatured ? true : undefined,
+        happyHour: this.onlyHappyHour ? true : undefined,
+        minPrice: this.minPrice ?? undefined,
+        maxPrice: this.maxPrice ?? undefined,
       });
 
       if (reqId !== this.searchRequestId) return;
 
       this.searchResults = results;
+      this.searching = true;
     }, 300);
-
   }
 
-  ///////////////
+
+
   async ngOnInit() {
     this.cargandoRestaurant = true;
 
@@ -90,7 +173,6 @@ export class RestaurantPage implements OnInit {
     }
 
     this.productService.products = [];
-
     this.restaurant = await this.restaurantService.getById(idNum) ?? undefined;
 
     if (this.restaurant) {
@@ -108,25 +190,35 @@ export class RestaurantPage implements OnInit {
     this.searchText = '';
     this.searching = false;
     this.searchResults = [];
+    this.featuredResults = [];
     clearTimeout(this.searchTimeout);
+
+    this.filtersOpen = false;
+    this.minPrice = null;
+    this.maxPrice = null;
+    this.onlyFeatured = false;
+    this.onlyHappyHour = false;
 
     this.cargandoRestaurant = false;
   }
 
-  /////////////// METODOS SELECT CATEGORY
   clearSelection() {
     this.selectedCategoryId = null;
+    if (this.searching) this.applyFilters();
   }
 
-  selectCategory(categoryId: number) {  //clickeo la pill
+  selectCategory(categoryId: number) {
     if (this.selectedCategoryId === categoryId) {
-      this.selectedCategoryId = null; //asi le saco el select
+      this.selectedCategoryId = null;
     } else {
       this.selectedCategoryId = categoryId;
     }
+
+    if (this.hasAnyFilterApplied()) {
+      this.applyFilters();
+    }
   }
 
-  //Borrado
   async deleteSelectedCategory() {
     if (!this.restaurant) return;
     if (this.selectedCategoryId === null) return;
@@ -153,16 +245,18 @@ export class RestaurantPage implements OnInit {
     if (!result.isConfirmed) return;
 
     const deleted = await this.categoryService.deleteCategory(this.selectedCategoryId);
-    
-    if (!deleted) {
-      Toast.fire({icon: 'error', title: 'No se pudo eliminar la categoría'});
-      return;
-    };
 
-    Toast.fire({icon: 'success', title: 'Categoría eliminada'});
+    if (!deleted) {
+      Toast.fire({ icon: 'error', title: 'No se pudo eliminar la categoría' });
+      return;
+    }
+
+    Toast.fire({ icon: 'success', title: 'Categoría eliminada' });
 
     this.categories = await this.categoryService.getByRestaurantId(this.restaurant.id);
     this.selectedCategoryId = null;
+
+    if (this.searching) this.applyFilters();
   }
 
   updateSelectedCategory() {
@@ -171,7 +265,7 @@ export class RestaurantPage implements OnInit {
     this.router.navigate(['/edit-category', this.restaurant.id, this.selectedCategoryId]);
   }
 
-  getProductsForCategory(categoryId: number) {  //Trae los productos de esa categoria
+  getProductsForCategory(categoryId: number) {
     return this.productService.getByCategoryId(categoryId);
   }
 
